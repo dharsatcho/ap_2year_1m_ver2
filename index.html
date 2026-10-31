@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11120e">
+  <title>Ржавый сигнал — аудиосинтезатор</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="synth" id="synth" aria-label="Аудиосинтезатор">
+    <img class="panel-background" src="background.png" alt="">
+    <img class="effect-layer" src="effect.png" alt="" aria-hidden="true">
+    <img class="rad_on" src="rad_on.png" alt="" aria-hidden="true">
+    <img class="wifi-indicator" id="wifi" src="wifi.png" alt="Радиосигнал включён" hidden>
+
+    <button class="start-button" id="start" type="button" aria-pressed="false" aria-label="Запустить аудиосистему">
+      <img class="control-image" src="start.png" alt="">
+    </button>
+
+    <div class="volume-knob left" id="knob-wrap-1">
+      <img class="knob-image" src="circle_slider_1.png" alt="">
+      <label class="sr-only" for="volume-1">Громкость первой мелодии</label>
+      <input id="volume-1" type="range" min="0" max="1" step="0.005" value="0" aria-label="Громкость первой мелодии">
+    </div>
+    <div class="volume-knob right" id="knob-wrap-2">
+      <img class="knob-image" src="circle_slider_2.png" alt="">
+      <label class="sr-only" for="volume-2">Громкость второй мелодии</label>
+      <input id="volume-2" type="range" min="0" max="1" step="0.005" value="0" aria-label="Громкость второй мелодии">
+    </div>
+
+    <button class="voice-button left" id="voice-1" type="button" aria-pressed="false" aria-label="Включить первую мелодию">
+      <img class="control-image" src="melody_1.png" alt="">
+    </button>
+    <button class="voice-button right" id="voice-2" type="button" aria-pressed="false" aria-label="Включить вторую мелодию">
+      <img class="control-image" src="melody_2.png" alt="">
+    </button>
+
+    <button class="effect-trigger left first" type="button" data-sound="beat" aria-pressed="false" aria-label="Включить левый бит">
+      <img src="button_left_1.png" alt="">
+    </button>
+    <button class="effect-trigger left second" type="button" data-sound="bass" aria-pressed="false" aria-label="Включить бас">
+      <img src="button_left_2.png" alt="">
+    </button>
+    <button class="effect-trigger right first" type="button" data-sound="siren" aria-pressed="false" aria-label="Включить правую высокую сирену">
+      <img src="button_right_1.png" alt="">
+    </button>
+    <button class="effect-trigger right second" type="button" data-sound="openHat" aria-pressed="false" aria-label="Включить правый открытый хэт">
+      <img src="button_right_2.png" alt="">
+    </button>
+
+    <div class="effect-slider first" data-voice="1">
+      <label class="sr-only" for="slider-1-tone">Первая мелодия: тональный фильтр</label>
+      <input id="slider-1-tone" name="slider_1_tone" type="range" min="0" max="1" step="0.01" value="0" aria-label="Первая мелодия: тональный фильтр">
+      <img class="slider-thumb" src="slider_left_1.png" alt="">
+    </div>
+    <div class="effect-slider second" data-voice="1">
+      <label class="sr-only" for="slider-1-space">Первая мелодия: металлический резонанс</label>
+      <input id="slider-1-space" name="slider_1_space" type="range" min="0" max="1" step="0.01" value="0" aria-label="Первая мелодия: металлический резонанс">
+      <img class="slider-thumb" src="slider_left_2.png" alt="">
+    </div>
+    <div class="effect-slider third" data-voice="1">
+      <label class="sr-only" for="slider-1-flutter">Громкость бита, баса и хэта</label>
+      <input id="slider-1-flutter" name="slider_1_rhythm_volume" type="range" min="0" max="1" step="0.01" value="0" aria-label="Громкость бита, баса и хэта">
+      <img class="slider-thumb" src="slider_left_3.png" alt="">
+    </div>
+    <div class="effect-slider first right" data-voice="2">
+      <label class="sr-only" for="slider-2-tone">Вторая мелодия: тональный фильтр</label>
+      <input id="slider-2-tone" name="slider_2_tone" type="range" min="0" max="1" step="0.01" value="0" aria-label="Вторая мелодия: тональный фильтр">
+      <img class="slider-thumb" src="slider_right_1.png" alt="">
+    </div>
+    <div class="effect-slider second right" data-voice="2">
+      <label class="sr-only" for="slider-2-space">Вторая мелодия: металлический резонанс</label>
+      <input id="slider-2-space" name="slider_2_space" type="range" min="0" max="1" step="0.01" value="0" aria-label="Вторая мелодия: металлический резонанс">
+      <img class="slider-thumb" src="slider_right_2.png" alt="">
+    </div>
+    <div class="effect-slider third right" data-voice="2">
+      <label class="sr-only" for="slider-2-flutter">Громкость сирены и кика</label>
+      <input id="slider-2-flutter" name="slider_2_rhythm_volume" type="range" min="0" max="1" step="0.01" value="0.13" aria-label="Громкость сирены и кика">
+      <img class="slider-thumb" src="slider_right_3.png" alt="">
+    </div>
+    <span class="sr-only" id="status" aria-live="polite">Аудиосистема выключена</span>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

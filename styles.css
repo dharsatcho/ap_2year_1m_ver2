@@ -1,0 +1,107 @@
+* { box-sizing: border-box; }
+
+html, body { min-width: 320px; min-height: 100%; }
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #11120e;
+  font-family: system-ui, sans-serif;
+}
+
+.synth {
+  position: relative;
+  width: min(100vw, 167.42vh);
+  aspect-ratio: 1110 / 663;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.panel-background, .effect-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.panel-background { z-index: -2; }
+.effect-layer {
+  z-index: 20;
+  opacity: var(--effect-opacity, 0);
+  pointer-events: none;
+  transition: opacity 700ms ease;
+  mix-blend-mode: color;
+  object-fit: fill;
+}
+
+button, input { font: inherit; }
+.control-image, .knob-image, .slider-thumb { position: absolute; display: block; pointer-events: none; }
+.start-button, .voice-button, .effect-trigger {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.start-button { left: 44%; top: 40.12%; width: 15.32%; height: 5.58%; }
+.start-button img { inset: 0; width: 100%; height: 100%; }
+.start-button:focus-visible, .voice-button:focus-visible { outline: 3px solid #f4d24c; outline-offset: 3px; }
+.voice-button { top: 40.72%; width: 7.03%; height: 5.73%; z-index: 2; }
+.voice-button.left { left: 35.4%; }
+.voice-button.right { left: 60.27%; }
+.voice-button img { inset: 0; width: 100%; height: 100%; transition: transform 120ms ease; }
+.voice-button[aria-pressed="true"] img, .effect-trigger.is-pressed img, .effect-trigger[aria-pressed="true"] img { transform: scaleX(-1); }
+
+.effect-trigger { z-index: 2; width: 6.31%; height: 8.75%; top: 40.72%; }
+.effect-trigger img { position: absolute; display: block; inset: 0; width: 100%; height: 100%; transition: transform 90ms ease; }
+.effect-trigger.left.first { left: 16.85%; }
+.effect-trigger.left.second { left: 23.78%; }
+.effect-trigger.right.first { left: 72.25%; }
+.effect-trigger.right.second { left: 79.2%; }
+
+.wifi-indicator { position: absolute !important; left: 43.96%; right: auto; top: 17%; bottom: auto; width: 14.42%; height: 18.7%; object-fit: contain; opacity: 0; transform: none; transition: opacity 250ms ease; pointer-events: none; }
+.wifi-indicator[hidden] { display: none !important; }
+.synth.started .wifi-indicator { left: 43.96%; top: 17%; transform: none; opacity: 1; }
+.synth.started .wifi-indicator.blink { animation: radio-blink 1.15s ease-in-out 2; }
+@keyframes radio-blink { 0%, 100% { opacity: 1; } 40%, 75% { opacity: .08; } }
+
+.volume-knob { position: absolute; width: 13.87%; aspect-ratio: 1; }
+.volume-knob.left { left: 17.39%; top: 14.48%; }
+.volume-knob.right { left: 73.15%; top: 16%; width: 10.45%; }
+.knob-image { inset: 0; width: 100%; height: 100%; transform: rotate(var(--knob-turn, 0deg)); transition: transform 100ms linear; }
+.volume-knob input {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: grab;
+  touch-action: none;
+  border-radius: 50%;
+}
+.volume-knob input:active { cursor: grabbing; }
+.volume-knob:focus-within { filter: drop-shadow(0 0 5px #ffe26b); }
+
+.effect-slider { position: absolute; left: 16.75%; width: 20.8%; height: 6.8%; z-index: 2; }
+.effect-slider.right { left: 65.4%; }
+.effect-slider.first { top: 53.1%; }
+.effect-slider.second { top: 64.45%; }
+.effect-slider.third { top: 75.5%; }
+.effect-slider input {
+  position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0;
+  opacity: 0; cursor: ew-resize; touch-action: none;
+}
+.slider-thumb { top: 0; left: var(--thumb-x, 0%); width: 25%; height: 100%; object-fit: fill; }
+.effect-slider input:focus-visible + .slider-thumb { filter: drop-shadow(0 0 5px #ffe26b); }
+
+.rad_on {
+  position: absolute;
+  z-index: 1;
+  left: 40.12%; top: 62.9%; width: 22.2%; height: 35.6%;
+  object-fit: contain;
+  opacity: var(--reactor-opacity, 0);
+  transition: opacity 700ms ease;
+  pointer-events: none;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (max-aspect-ratio: 1110 / 663) {
+  body { overflow: auto; }
+  .synth { width: 100vw; }
+}
